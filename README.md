@@ -69,7 +69,7 @@ Graph: Received Power vs Distance (decay curve)
 ## Python Code
 
 
-## Graph: Received Power vs Distance (decay curve)
+## Output
  
   
 ## Result
