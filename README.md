@@ -67,9 +67,53 @@ Graph: Received Power vs Distance (decay curve)
 <img width="672" height="461" alt="image" src="https://github.com/user-attachments/assets/448e0d3f-a834-4e14-953f-4d429b7a9996" />
 
 ## Python Code
+import numpy as np
+import matplotlib.pyplot as plt
 
+#Input optical power in microwatts
+Pin = 1500  # µW
+
+#Distance between transmitter and receiver in metres
+distance = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+#FSO attenuation coefficient
+alpha = 0.20  # per metre
+
+#Calculate received power using exponential attenuation
+Pout = Pin * np.exp(-alpha * distance)
+
+#Calculate link loss in dB
+loss = 10 * np.log10(Pin / Pout)
+
+#Display results
+print("FSO Communication Results")
+print("-------------------------")
+print("Distance (m) | Received Power (µW) | Loss (dB)")
+
+for d, p, l in zip(distance, Pout, loss):
+    print(f"{d:11} | {p:20.2f} | {l:8.2f}")
+
+#Plot received power versus distance
+plt.figure(figsize=(8, 5))
+plt.plot(distance, Pout, marker='o')
+plt.xlabel("Distance (m)")
+plt.ylabel("Received Power (µW)")
+plt.title("FSO Received Power vs Distance")
+plt.grid(True)
+plt.show()
+
+#Plot link loss versus distance
+plt.figure(figsize=(8, 5))
+plt.plot(distance, loss, marker='o')
+plt.xlabel("Distance (m)")
+plt.ylabel("Link Loss (dB)")
+plt.title("FSO Link Loss vs Distance")
+plt.grid(True)
+plt.show()
 
 ## Output
- 
+ <img width="652" height="217" alt="image" src="https://github.com/user-attachments/assets/a306ef17-5e67-4ef0-920f-e8a2d615bddc" />
+The graph shows that the received optical power decreases exponentially as the distance between the transmitter and receiver increases. The link loss increases with distance, demonstrating the effect of atmospheric/path attenuation on an FSO communication link.
   
 ## Result
+The free-space optical communication link was successfully implemented and analyzed using Python. The received optical power decreased exponentially with increasing transmission distance, while the link loss increased correspondingly. The results demonstrate that distance and proper alignment significantly affect FSO link performance, and reliable indoor communication can be achieved over short distances under suitable conditions.
